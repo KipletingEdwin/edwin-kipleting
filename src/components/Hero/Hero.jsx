@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 
 const Hero = () => {
   return (
-<Box
+    <Box
       id="home"
       sx={{
         minHeight: "40vh",
@@ -13,14 +13,14 @@ const Hero = () => {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        //bgcolor: "background.default",
-        px: 2, 
+        bgcolor: "background.default",
+        px: 2,
       }}
     >
       <Typography
         variant="h2"
-        component="h1"
-        sx={{ fontWeight: "bold", mb: 2 }}
+        //component="h1"
+        sx={{ fontWeight: "bold", mb: 2, mt: 2 }}
       >
         Hi, I’m Edwin 👋
       </Typography>
@@ -30,7 +30,8 @@ const Hero = () => {
         color="text.secondary"
         sx={{ mb: 4, maxWidth: 600 }}
       >
-        I build modern, responsive web applications using ReactJs, AngularJs,Material UI and Ruby on Rails
+        I build modern, responsive web applications using ReactJs,
+        AngularJs,Material UI and Ruby on Rails
       </Typography>
 
       <Box sx={{ display: "flex", gap: 2 }}>
@@ -51,4 +52,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
