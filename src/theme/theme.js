@@ -4,16 +4,20 @@ import { createTheme } from "@mui/material";
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#1976d2",
+            main: "#ea580c",
         },
+        // primary: {
+        //     main: "#1f2d41",
+        // },
         secondary: {
-            main: "#ff4081",
-        }, background: {
-            default: "#99f9f9",
+            main: "#171717",
+        },
+         background: {
+            default: "#171717",
         },
       },
       typography: {
-        fontFamily: '"Outfit", sans-serif',
+        fontFamily: '"IBM Plex Sans", sans-serif',
       },
 });
 

@@ -1,71 +1,155 @@
+import React, { useState } from "react";
 import {
   AppBar,
-  Box,
+  Toolbar,
+  Typography,
   Button,
-  Drawer,
+  Box,
   IconButton,
+  Drawer,
   List,
   ListItemButton,
   ListItemText,
-  Toolbar,
-  Typography,
+  Divider,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { useState } from "react";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
-  const menuItems = ["Home", "About", "Services", "Work", "Contacts"];
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuItems = ["Home", "About", "Services","Projects", "Contacts"];
 
-  const toggleDrawer = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleDrawer = () => setMenuOpen(!menuOpen);
 
   return (
     <>
       <AppBar
-        position="sticky"
-        elevation={2}
-        //  color='default'
+        position="fixed"
+        elevation={0}
+        sx={{
+          //background: "rgba(255, 255, 255, 0.04)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          color: "white",
+          px: { xs: 2, md: 6 },
+          py: 1,
+        }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          {/* Logo */}
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            Edwin
-          </Typography>
+        {/* Framer Motion container for entrance animation */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+        >
+          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+            {/* Logo */}
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                letterSpacing: 1,
+                cursor: "pointer",
+                color: "#64b5f6"
+              }}
+            >
+              Edwin<span style={{ color: "#64b5f6" }}>.</span>
+            </Typography>
 
-          {/* Desktop Menu */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            {menuItems.map((menuItem) => (
-              <Button key={menuItem} color="inherit">
-                {menuItem}
-              </Button>
-            ))}
-          </Box>
+            {/* Desktop Menu */}
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                gap: 1,
+                alignItems: "center",
+              }}
+            >
+              {menuItems.map((item, index) => (
+                <motion.div
+                  key={item}
+                  backgroundColor = "white"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.2 + index * 0.1,
+                  }}
+                >
+                  <Button
+                    sx={{
+                      color: "white",
+                      textTransform: "none",
+                      borderRadius: "50px",
+                      px: 2.5,
+                      fontSize: "1rem",
+                      fontWeight: 500,
+                      "&:hover": {
+                        backgroundColor: "rgba(255,255,255,0.08)",
+                        transition: "all 0.3s ease",
+                      },
+                    }}
+                  >
+                    {item}
+                  </Button>
+                </motion.div>
+              ))}
 
-          {/* Mobile menu button */}
-          <IconButton
-            color="inherit"
-            edge="end"
-            sx={{ display: { xs: "flex", md: "none" } }}
-            onClick={toggleDrawer}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
+            
+            </Box>
+
+            {/* Mobile Menu Button */}
+            <IconButton
+              color="inherit"
+              sx={{ display: { xs: "flex", md: "none" } }}
+              onClick={toggleDrawer}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </motion.div>
       </AppBar>
 
-      {/* Drawer for mobile menu */}
+      {/* Drawer (Mobile Menu) */}
+      <Drawer
+        anchor="right"
+        open={menuOpen}
+        onClose={toggleDrawer}
+        PaperProps={{
+          sx: {
+            backgroundColor: "#0a0a0a",
+            color: "white",
+            width: 220,
+            pt: 2,
+          },
+        }}
+      >
+        <List>
+          {menuItems.map((item) => (
+            <ListItemButton
+              key={item}
+              onClick={toggleDrawer}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,0.08)",
+                },
+              }}
+            >
+              <ListItemText
+                primary={item}
+                // primaryTypographyProps={{
+                //   fontWeight: 500,
+                //   fontSize: "1rem",
+                // }}
+              />
+            </ListItemButton>
+          ))}
+        </List>
 
-      <Drawer anchor="right" open={menuOpen} onClose={toggleDrawer}>
-        <Box sx={{ width: 150 }} role="presentation" onClick={toggleDrawer}>
-          <List>
-            {menuItems.map((menuItem) => (
-              <ListItemButton onClick={toggleDrawer}>
-                <ListItemText primary={menuItem} />
-              </ListItemButton>
-            ))}
-          </List>
+        <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
+
+        <Box sx={{ p: 2 }}>
+
+
         </Box>
       </Drawer>
     </>
