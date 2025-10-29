@@ -13,7 +13,7 @@ const Hero = () => {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        bgcolor: "background.default",
+        //bgcolor: "background.default",
         px: 2, 
       }}
     >
